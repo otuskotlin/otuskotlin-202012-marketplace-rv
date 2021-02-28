@@ -3,7 +3,7 @@ package ru.otus.otuskotlin.marketplace.transport.models.common
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MpErrorDTO(
+data class MpErrorDto(
     val code: String?,
     val message: String?,
     val field: String?,
@@ -14,6 +14,5 @@ data class MpErrorDTO(
         INFO,
         WARNING,
         ERROR,
-
     }
 }

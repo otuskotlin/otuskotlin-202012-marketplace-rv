@@ -3,7 +3,7 @@ package ru.otus.otuskotlin.marketplace.transport.models.common
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class MpWorkModeDTO {
+enum class MpWorkModeDto {
     PROD,
     STUB,
 }
