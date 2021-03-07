@@ -12,3 +12,4 @@ rootProject.name = "otuskotlin-202012-marketplace-rv"
 include("ok-marketplace-rv-common-be")
 include("ok-marketplace-rv-common-mp")
 include("ok-marketplace-transport-mp")
+include("ok-marketplace-rv-be-mappers-mp")

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import ru.otus.otuskotlin.marketplace.transport.models.common.*
 
 @Serializable
-data class MpShopDto(
+data class MpWorkshopDto(
     override val id: String? = null,
     override val title: String? = null,
     override val description: String? = null,
@@ -13,14 +13,14 @@ data class MpShopDto(
 ) : IMpThingDto
 
 @Serializable
-data class MpShopCreateDto(
+data class MpWorkshopCreateDto(
     override val title: String? = null,
     override val description: String? = null,
     override val tagIds: Set<String>? = null,
 ): IMpCreateThingDto
 
 @Serializable
-data class MpShopUpdateDto(
+data class MpWorkshopUpdateDto(
     override val title: String? = null,
     override val description: String? = null,
     override val tagIds: Set<String>? = null,
@@ -30,13 +30,13 @@ data class MpShopUpdateDto(
 // Requests
 
 @Serializable
-@SerialName("MpRequestShopCreate")
-data class MpRequestShopCreate(
+@SerialName("MpRequestWorkshopCreate")
+data class MpRequestWorkshopCreate(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
     override val debug: IMpDebug? = null,
-    val createData: MpShopCreateDto? = null,
+    val createData: MpWorkshopCreateDto? = null,
 )  : IMpRequest, MpMessage() {
 
     @Serializable
@@ -45,13 +45,13 @@ data class MpRequestShopCreate(
     ) : IMpDebug
 }
 @Serializable
-@SerialName("MpRequestShopRead")
-data class MpRequestShopRead(
+@SerialName("MpRequestWorkshopRead")
+data class MpRequestWorkshopRead(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
     override val debug: IMpDebug? = null,
-    val artId: String? = null,
+    val workshopId: String? = null,
 ) : IMpRequest, MpMessage() {
 
     @Serializable
@@ -61,13 +61,13 @@ data class MpRequestShopRead(
 }
 
 @Serializable
-@SerialName("MpRequestShopUpdate")
-data class MpRequestShopUpdate(
+@SerialName("MpRequestWorkshopUpdate")
+data class MpRequestWorkshopUpdate(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
     override val debug: IMpDebug? = null,
-    val updateData: MpShopUpdateDto? = null,
+    val updateData: MpWorkshopUpdateDto? = null,
 ) : IMpRequest, MpMessage() {
 
     @Serializable
@@ -77,13 +77,13 @@ data class MpRequestShopUpdate(
 }
 
 @Serializable
-@SerialName("MpRequestShopDelete")
-data class MpRequestShopDelete(
+@SerialName("MpRequestWorkshopDelete")
+data class MpRequestWorkshopDelete(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
     override val debug: IMpDebug? = null,
-    val artId: String? = null,
+    val workshopId: String? = null,
 ) : IMpRequest, MpMessage() {
 
     @Serializable
@@ -95,13 +95,13 @@ data class MpRequestShopDelete(
 //Responses
 
 @Serializable
-@SerialName("MpResponseShopCreate")
-data class MpResponseShopCreate(
+@SerialName("MpResponseWorkshopCreate")
+data class MpResponseWorkshopCreate(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
     override val debug: IMpDebug? = null,
-    val workshop: MpShopDto? = null,
+    val workshop: MpWorkshopDto? = null,
 )  : IMpRequest, MpMessage() {
 
     @Serializable
@@ -110,13 +110,13 @@ data class MpResponseShopCreate(
     ) : IMpDebug
 }
 @Serializable
-@SerialName("MpResponseShopRead")
-data class MpResponseShopRead(
+@SerialName("MpResponseWorkshopRead")
+data class MpResponseWorkshopRead(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
     override val debug: IMpDebug? = null,
-    val workshop: MpShopDto? = null,
+    val workshop: MpWorkshopDto? = null,
 ) : IMpRequest, MpMessage() {
 
     @Serializable
@@ -126,13 +126,13 @@ data class MpResponseShopRead(
 }
 
 @Serializable
-@SerialName("MpResponseShopUpdate")
-data class MpResponseShopUpdate(
+@SerialName("MpResponseWorkshopUpdate")
+data class MpResponseWorkshopUpdate(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
     override val debug: IMpDebug? = null,
-    val workshop: MpShopDto? = null,
+    val workshop: MpWorkshopDto? = null,
 ) : IMpRequest, MpMessage() {
 
     @Serializable
@@ -142,13 +142,13 @@ data class MpResponseShopUpdate(
 }
 
 @Serializable
-@SerialName("MpResponseShopDelete")
-data class MpResponseShopDelete(
+@SerialName("MpResponseWorkshopDelete")
+data class MpResponseWorkshopDelete(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
     override val debug: IMpDebug? = null,
-    val workshop: MpShopDto? = null,
+    val workshop: MpWorkshopDto? = null,
     val deleted: Boolean? = null,
 ) : IMpRequest, MpMessage() {
 
