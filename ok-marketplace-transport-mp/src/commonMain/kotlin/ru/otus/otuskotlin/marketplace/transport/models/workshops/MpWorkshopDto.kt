@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.marketplace.transport.models.workshops
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import ru.otus.otuskotlin.marketplace.transport.models.arts.MpArtDto
 import ru.otus.otuskotlin.marketplace.transport.models.common.*
 
 @Serializable
@@ -10,6 +11,7 @@ data class MpWorkshopDto(
     override val title: String? = null,
     override val description: String? = null,
     override val tagIds: Set<String>? = null,
+    val arts: MutableSet<MpArtDto>? = null,
 ) : IMpThingDto
 
 @Serializable
@@ -25,6 +27,7 @@ data class MpWorkshopUpdateDto(
     override val description: String? = null,
     override val tagIds: Set<String>? = null,
     override val id: String? = null,
+    val arts: MutableSet<MpArtDto>? = null,
 ): IMpUpdateThingDto
 
 // Requests
