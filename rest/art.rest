@@ -1,0 +1,27 @@
+POST http://localhost:8080/art/create
+Content-Type: application/json
+
+{"type": "MpRequestArtCreate","createData": {"title": "art test", "description": "some description"}}
+
+###
+
+POST http://localhost:8080/art/read
+Content-Type: application/json
+
+{"type": "MpRequestArtRead", "artId": "kukaracha"}
+
+###
+
+POST http://localhost:8080/art/update
+Content-Type: application/json
+
+{"type": "MpRequestArtUpdate", "updateData": {"id":"tartartar","title": "art test", "description": "some description"}}
+
+###
+
+POST http://localhost:8080/art/delete
+Content-Type: application/json
+
+{"type": "MpRequestArtDelete", "artId": "123"}
+
+###

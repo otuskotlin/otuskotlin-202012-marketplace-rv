@@ -1,0 +1,27 @@
+POST http://localhost:8080/workshop/create
+Content-Type: application/json
+
+{"type": "MpRequestWorkshopCreate","createData": {"title": "Workshop test", "description": "some description"}}
+
+###
+
+POST http://localhost:8080/workshop/read
+Content-Type: application/json
+
+{"type": "MpRequestWorkshopRead", "workshopId": "kukaracha"}
+
+###
+
+POST http://localhost:8080/workshop/update
+Content-Type: application/json
+
+{"type": "MpRequestWorkshopUpdate", "updateData": {"id":"tartartar","title": "Workshop test", "description": "some description"}}
+
+###
+
+POST http://localhost:8080/workshop/delete
+Content-Type: application/json
+
+{"type": "MpRequestWorkshopDelete", "workshopId": "123"}
+
+###
