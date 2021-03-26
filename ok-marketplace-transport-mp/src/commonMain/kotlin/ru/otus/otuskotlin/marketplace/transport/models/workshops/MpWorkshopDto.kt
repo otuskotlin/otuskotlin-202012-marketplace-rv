@@ -2,6 +2,7 @@ package ru.otus.otuskotlin.marketplace.transport.models.workshops
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import ru.otus.otuskotlin.marketplace.transport.models.arts.MpArtDto
 import ru.otus.otuskotlin.marketplace.transport.models.common.*
 
 @Serializable
@@ -10,6 +11,7 @@ data class MpWorkshopDto(
     override val title: String? = null,
     override val description: String? = null,
     override val tagIds: Set<String>? = null,
+    val arts: MutableSet<MpArtDto>? = null,
 ) : IMpThingDto
 
 @Serializable
@@ -25,6 +27,7 @@ data class MpWorkshopUpdateDto(
     override val description: String? = null,
     override val tagIds: Set<String>? = null,
     override val id: String? = null,
+    val arts: MutableSet<MpArtDto>? = null,
 ): IMpUpdateThingDto
 
 // Requests
@@ -97,12 +100,13 @@ data class MpRequestWorkshopDelete(
 @Serializable
 @SerialName("MpResponseWorkshopCreate")
 data class MpResponseWorkshopCreate(
-    override val requestId: String? = null,
-    override val onRequestResponseId: String? = null,
-    override val timeStart: String? = null,
+    override val responseId: String? = null,
+    override val onRequestId: String? = null,
     override val debug: IMpDebug? = null,
+    override val responseStatus: MpResponseStatusDto? = null,
+    override val errors: List<MpErrorDto>? = null,
     val workshop: MpWorkshopDto? = null,
-)  : IMpRequest, MpMessage() {
+)  : IMpResponse, MpMessage() {
 
     @Serializable
     data class Debug(
@@ -112,12 +116,13 @@ data class MpResponseWorkshopCreate(
 @Serializable
 @SerialName("MpResponseWorkshopRead")
 data class MpResponseWorkshopRead(
-    override val requestId: String? = null,
-    override val onRequestResponseId: String? = null,
-    override val timeStart: String? = null,
+    override val responseId: String? = null,
+    override val onRequestId: String? = null,
     override val debug: IMpDebug? = null,
+    override val responseStatus: MpResponseStatusDto? = null,
+    override val errors: List<MpErrorDto>? = null,
     val workshop: MpWorkshopDto? = null,
-) : IMpRequest, MpMessage() {
+) : IMpResponse, MpMessage() {
 
     @Serializable
     data class Debug(
@@ -128,12 +133,13 @@ data class MpResponseWorkshopRead(
 @Serializable
 @SerialName("MpResponseWorkshopUpdate")
 data class MpResponseWorkshopUpdate(
-    override val requestId: String? = null,
-    override val onRequestResponseId: String? = null,
-    override val timeStart: String? = null,
+    override val responseId: String? = null,
+    override val onRequestId: String? = null,
+    override val responseStatus: MpResponseStatusDto? = null,
+    override val errors: List<MpErrorDto>? = null,
     override val debug: IMpDebug? = null,
     val workshop: MpWorkshopDto? = null,
-) : IMpRequest, MpMessage() {
+) : IMpResponse, MpMessage() {
 
     @Serializable
     data class Debug(
@@ -144,13 +150,14 @@ data class MpResponseWorkshopUpdate(
 @Serializable
 @SerialName("MpResponseWorkshopDelete")
 data class MpResponseWorkshopDelete(
-    override val requestId: String? = null,
-    override val onRequestResponseId: String? = null,
-    override val timeStart: String? = null,
+    override val responseId: String? = null,
+    override val onRequestId: String? = null,
+    override val responseStatus: MpResponseStatusDto? = null,
+    override val errors: List<MpErrorDto>? = null,
     override val debug: IMpDebug? = null,
     val workshop: MpWorkshopDto? = null,
     val deleted: Boolean? = null,
-) : IMpRequest, MpMessage() {
+) : IMpResponse, MpMessage() {
 
     @Serializable
     data class Debug(

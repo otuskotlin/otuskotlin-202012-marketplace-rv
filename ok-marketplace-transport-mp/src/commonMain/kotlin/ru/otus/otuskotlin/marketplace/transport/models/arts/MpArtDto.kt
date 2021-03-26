@@ -97,12 +97,13 @@ data class MpRequestArtDelete(
 @Serializable
 @SerialName("MpResponseArtCreate")
 data class MpResponseArtCreate(
-    override val requestId: String? = null,
-    override val onRequestResponseId: String? = null,
-    override val timeStart: String? = null,
+    override val responseId: String? = null,
+    override val onRequestId: String? = null,
     override val debug: IMpDebug? = null,
+    override val responseStatus: MpResponseStatusDto? = null,
+    override val errors: List<MpErrorDto>? = null,
     val art: MpArtDto? = null,
-)  : IMpRequest, MpMessage() {
+)  : IMpResponse, MpMessage() {
 
     @Serializable
     data class Debug(
@@ -112,12 +113,13 @@ data class MpResponseArtCreate(
 @Serializable
 @SerialName("MpResponseArtRead")
 data class MpResponseArtRead(
-    override val requestId: String? = null,
-    override val onRequestResponseId: String? = null,
-    override val timeStart: String? = null,
+    override val responseId: String? = null,
+    override val onRequestId: String? = null,
     override val debug: IMpDebug? = null,
+    override val responseStatus: MpResponseStatusDto? = null,
+    override val errors: List<MpErrorDto>? = null,
     val art: MpArtDto? = null,
-) : IMpRequest, MpMessage() {
+) : IMpResponse, MpMessage() {
 
     @Serializable
     data class Debug(
@@ -128,12 +130,13 @@ data class MpResponseArtRead(
 @Serializable
 @SerialName("MpResponseArtUpdate")
 data class MpResponseArtUpdate(
-    override val requestId: String? = null,
-    override val onRequestResponseId: String? = null,
-    override val timeStart: String? = null,
+    override val responseId: String? = null,
+    override val onRequestId: String? = null,
     override val debug: IMpDebug? = null,
+    override val responseStatus: MpResponseStatusDto? = null,
+    override val errors: List<MpErrorDto>? = null,
     val art: MpArtDto? = null,
-) : IMpRequest, MpMessage() {
+) : IMpResponse, MpMessage() {
 
     @Serializable
     data class Debug(
@@ -144,13 +147,14 @@ data class MpResponseArtUpdate(
 @Serializable
 @SerialName("MpResponseArtDelete")
 data class MpResponseArtDelete(
-    override val requestId: String? = null,
-    override val onRequestResponseId: String? = null,
-    override val timeStart: String? = null,
+    override val responseId: String? = null,
+    override val onRequestId: String? = null,
     override val debug: IMpDebug? = null,
+    override val responseStatus: MpResponseStatusDto? = null,
+    override val errors: List<MpErrorDto>? = null,
     val art: MpArtDto? = null,
     val deleted: Boolean? = null,
-) : IMpRequest, MpMessage() {
+) : IMpResponse, MpMessage() {
 
     @Serializable
     data class Debug(
