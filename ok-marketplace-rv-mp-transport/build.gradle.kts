@@ -1,5 +1,3 @@
-val serializationVersion: String by project
-
 plugins {
     java
     kotlin("multiplatform")
@@ -22,11 +20,11 @@ kotlin {
         browser {}
         nodejs {}
     }
-    jvm {
-        withJava()
-    }
+    jvm {}
 
     sourceSets {
+        val serializationVersion: String by project
+
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))

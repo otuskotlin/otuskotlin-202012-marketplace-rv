@@ -13,9 +13,17 @@ data class MpWorkshopModel(
     override val title: String = "",
     override val description: String = "",
     override val tagIds: MutableSet<String> = mutableSetOf(),
-    val arts: MutableSet<MpArtModel> = mutableSetOf(),
+    val arts: MutableSet<MpArtIdModel> = mutableSetOf(),
 ) : IMpThingModel {
     companion object {
         val NONE = MpWorkshopModel()
+    }
+}
+
+data class MpWorkshopFilterModel(
+    val text: String = ""
+) {
+    companion object {
+        val NONE = MpWorkshopFilterModel()
     }
 }

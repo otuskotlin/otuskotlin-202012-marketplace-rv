@@ -4,10 +4,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MpErrorDto(
-    val code: String?,
-    val message: String?,
-    val field: String?,
-    val level: ErrorLevelDto?,
+    val code: String? = null,
+    val message: String? = null,
+    val field: String? = null,
+    val level: ErrorLevelDto? = null,
 ) {
     @Serializable
     enum class ErrorLevelDto {

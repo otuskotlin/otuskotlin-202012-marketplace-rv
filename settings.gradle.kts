@@ -14,8 +14,9 @@ include("ok-marketplace-rv-app-ktor")
 //backend
 include("ok-marketplace-rv-be-common")
 include("ok-marketplace-rv-be-mappers-mp")
+include("ok-marketplace-rv-be-business-logic")
 //multiplatform
 include("ok-marketplace-rv-mp-common")
 include("ok-marketplace-rv-mp-transport")
-
-
+include("ok-marketplace-rv-mp-pipelines")
+include("ok-marketplace-rv-mp-pipelines-validation")

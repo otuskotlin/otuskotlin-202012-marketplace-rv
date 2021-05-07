@@ -19,3 +19,11 @@ data class MpArtModel(
         val NONE = MpArtModel ()
     }
 }
+
+data class MpArtFilterModel(
+    val text: String = ""
+) {
+    companion object {
+        val NONE = MpArtFilterModel()
+    }
+}
