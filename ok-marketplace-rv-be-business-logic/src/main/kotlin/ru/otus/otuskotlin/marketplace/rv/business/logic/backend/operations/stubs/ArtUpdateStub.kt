@@ -17,9 +17,9 @@ object ArtUpdateStub : IOperation<MpBeContext> by pipeline({
         execute {
             responseArt = MpArtModel(
                 id = MpArtIdModel("some_id"),
-                title = "some_title",
-                description = "some_description",
-                tagIds = mutableSetOf("tag1","tag2"),
+                title = requestArt.title,
+                description = requestArt.description,
+                tagIds = requestArt.tagIds,
             )
             status = MpBeContextStatus.FINISHING
         }

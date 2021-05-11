@@ -15,10 +15,10 @@ object WorkshopCreateStub: IOperation<MpBeContext> by pipeline ({
         execute {
             responseWorkshop = MpWorkshopModel(
                 id = MpWorkshopIdModel("some_id"),
-                title = "some_title",
-                description = "some_description",
-                tagIds = mutableSetOf("tag1","tag2"),
-                arts = mutableSetOf(MpArtIdModel("1"),MpArtIdModel("2"))
+                title = requestWorkshop.title,
+                description = requestWorkshop.description,
+                tagIds = requestWorkshop.tagIds,
+                arts = requestWorkshop.arts,
             )
             status = MpBeContextStatus.FINISHING
         }
