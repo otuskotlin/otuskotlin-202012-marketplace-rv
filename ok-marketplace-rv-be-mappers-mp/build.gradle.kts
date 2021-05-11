@@ -14,6 +14,6 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
 
-    implementation(project(":ok-marketplace-rv-common-be"))
-    implementation(project(":ok-marketplace-transport-mp"))
+    implementation(project(":ok-marketplace-rv-be-common"))
+    implementation(project(":ok-marketplace-rv-mp-transport"))
 }

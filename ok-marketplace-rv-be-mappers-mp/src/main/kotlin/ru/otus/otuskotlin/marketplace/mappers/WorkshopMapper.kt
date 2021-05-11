@@ -1,15 +1,10 @@
 package ru.otus.otuskotlin.marketplace.mappers
 
 import ru.otus.otuskotlin.marketplace.common.backend.context.MpBeContext
-import ru.otus.otuskotlin.marketplace.common.backend.models.MpArtIdModel
-import ru.otus.otuskotlin.marketplace.common.backend.models.MpArtModel
-import ru.otus.otuskotlin.marketplace.common.backend.models.MpWorkshopIdModel
-import ru.otus.otuskotlin.marketplace.common.backend.models.MpWorkshopModel
-import ru.otus.otuskotlin.marketplace.transport.models.arts.MpArtDto
-import ru.otus.otuskotlin.marketplace.transport.models.workshops.MpRequestWorkshopCreate
-import ru.otus.otuskotlin.marketplace.transport.models.workshops.MpRequestWorkshopDelete
-import ru.otus.otuskotlin.marketplace.transport.models.workshops.MpRequestWorkshopRead
-import ru.otus.otuskotlin.marketplace.transport.models.workshops.MpRequestWorkshopUpdate
+import ru.otus.otuskotlin.marketplace.common.backend.models.*
+import ru.otus.otuskotlin.marketplace.transport.models.arts.*
+import ru.otus.otuskotlin.marketplace.transport.models.workshops.*
+import java.time.Instant
 
 fun MpBeContext.setWorkshopCreateQuery(request: MpRequestWorkshopCreate) {
     requestWorkshop = MpWorkshopModel (
@@ -29,13 +24,73 @@ fun MpBeContext.setWorkshopUpdateQuery(request: MpRequestWorkshopUpdate) {
         title = request.updateData?.title?: "",
         description = request.updateData?.description?: "",
         tagIds = request.updateData?.tagIds?.toMutableSet()?: mutableSetOf(),
-        arts = request.updateData?.arts?.map {it.toInternal()}?.toMutableSet() ?: mutableSetOf(),
     )
 }
 
 fun MpBeContext.setWorkshopDeleteQuery(request: MpRequestWorkshopDelete) {
     this.requestWorkshopId = request.workshopId?.let { MpWorkshopIdModel(it) } ?: MpWorkshopIdModel.NONE
 }
+
+fun MpBeContext.setWorkshopListQuery(request: MpRequestWorkshopList) {
+    this.requestWorkshopFilter = request.filterData?.let {
+        MpWorkshopFilterModel(
+            text = it.text?: ""
+        )
+    }?: MpWorkshopFilterModel.NONE
+}
+
+fun MpBeContext.respondWorkshopCreate() = MpResponseWorkshopCreate(
+    workshop = responseWorkshop.takeIf { it != MpWorkshopModel.NONE }?.toTransport(),
+    errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
+    status = status.toTransport(),
+    responseId = responseId,
+    onRequest = onRequest,
+    endTime = Instant.now().toString()
+)
+
+fun MpBeContext.respondWorkshopRead() = MpResponseWorkshopRead(
+    workshop = responseWorkshop.takeIf { it != MpWorkshopModel.NONE }?.toTransport(),
+    errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
+    status = status.toTransport(),
+    responseId = responseId,
+    onRequest = onRequest,
+    endTime = Instant.now().toString()
+)
+
+fun MpBeContext.respondWorkshopUpdate() = MpResponseWorkshopUpdate(
+    workshop = responseWorkshop.takeIf { it != MpWorkshopModel.NONE }?.toTransport(),
+    errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
+    status = status.toTransport(),
+    responseId = responseId,
+    onRequest = onRequest,
+    endTime = Instant.now().toString()
+)
+
+fun MpBeContext.respondWorkshopDelete() = MpResponseWorkshopDelete(
+    workshop = responseWorkshop.takeIf { it != MpWorkshopModel.NONE }?.toTransport(),
+    errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
+    status = status.toTransport(),
+    responseId = responseId,
+    onRequest = onRequest,
+    endTime = Instant.now().toString()
+)
+
+fun MpBeContext.respondWorkshopList() = MpResponseWorkshopList(
+    workshops = responseWorkshops.takeIf { it.isNotEmpty() }?.filter { it != MpWorkshopModel.NONE }
+        ?.map { it.toTransport() },
+    errors = errors.takeIf { it.isNotEmpty() }?.map { it.toTransport() },
+    status = status.toTransport(),
+    responseId = responseId,
+    onRequest = onRequest,
+    endTime = Instant.now().toString()
+)
+
+internal fun MpWorkshopModel.toTransport() = MpWorkshopDto(
+    id = id.id.takeIf { it.isNotBlank() },
+    title = title.takeIf { it.isNotBlank() },
+    description = description.takeIf { it.isNotBlank() },
+    tagIds = tagIds.takeIf { it.isNotEmpty() },
+)
 
 fun MpArtDto.toInternal() = MpArtModel(
     id = id?.let {MpArtIdModel(it)} ?: MpArtIdModel.NONE,

@@ -1,0 +1,17 @@
+package ru.otus.otuskotlin.marketplace.common.backend.models
+
+enum class MpStubCase {
+    NONE,
+
+    WORKSHOP_CREATE_SUCCESS,
+    WORKSHOP_READ_SUCCESS,
+    WORKSHOP_UPDATE_SUCCESS,
+    WORKSHOP_DELETE_SUCCESS,
+    WORKSHOP_FILTER_SUCCESS,
+
+    ART_CREATE_SUCCESS,
+    ART_READ_SUCCESS,
+    ART_UPDATE_SUCCESS,
+    ART_DELETE_SUCCESS,
+    ART_FILTER_SUCCESS,
+}

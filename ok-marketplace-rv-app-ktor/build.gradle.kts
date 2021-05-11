@@ -22,9 +22,10 @@ repositories {
 
 dependencies {
 
-    implementation(project(":ok-marketplace-rv-common-be"))
+    implementation(project(":ok-marketplace-rv-be-common"))
     implementation(project(":ok-marketplace-rv-be-mappers-mp"))
-    implementation(project(":ok-marketplace-transport-mp"))
+    implementation(project(":ok-marketplace-rv-be-business-logic"))
+    implementation(project(":ok-marketplace-rv-mp-transport"))
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     implementation("io.ktor:ktor-server-core:$ktorVersion")
