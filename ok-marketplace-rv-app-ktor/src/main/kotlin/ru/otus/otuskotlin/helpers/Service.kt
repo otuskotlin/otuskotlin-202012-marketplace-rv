@@ -1,6 +1,9 @@
 package ru.otus.otuskotlin.helpers
 
+import io.ktor.http.cio.websocket.*
+import kotlinx.coroutines.isActive
 import ru.otus.otuskotlin.marketplace.common.backend.context.MpBeContext
+import ru.otus.otuskotlin.marketplace.common.backend.context.MpBeContextStatus
 import ru.otus.otuskotlin.marketplace.transport.models.arts.*
 import ru.otus.otuskotlin.marketplace.transport.models.common.MpMessage
 import ru.otus.otuskotlin.marketplace.transport.models.workshops.*
@@ -13,7 +16,7 @@ suspend fun service(
     query: MpMessage?,
     artService: ArtService,
     workshopService: WorkshopService,
-): MpMessage = when(query) {
+): MpMessage? = when(query) {
     is MpRequestArtList ->   artService.list(context, query)
     is MpRequestArtCreate -> artService.create(context, query)
     is MpRequestArtRead ->   artService.read(context, query)
@@ -26,6 +29,17 @@ suspend fun service(
     is MpRequestWorkshopUpdate -> workshopService.update(context, query)
     is MpRequestWorkshopDelete -> workshopService.delete(context, query)
 
-    else -> throw RuntimeException("It's somehow unreal to be here")
-    
+    else ->
+        // В дальнейшем здесь должен оказаться чейн обработки ошибок, и других событий
+        when {
+            context.status == MpBeContextStatus.FAILING -> artService.list(context, null)
+            // Если содзана новая сессия
+            (context.userSession.fwSession as? WebSocketSession)?.isActive == true -> artService.list(
+                context,
+                MpRequestArtList()
+            )
+            // Если удалена сессия
+            (context.userSession.fwSession as? WebSocketSession)?.isActive == false -> null
+            else -> null
+        }
 }
