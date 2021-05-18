@@ -9,6 +9,7 @@ val testContainersVersion: String by project
 plugins {
     application
     kotlin("jvm")
+    id("com.bmuschko.docker-java-application")
 }
 
 group = rootProject.group
@@ -16,6 +17,20 @@ version = rootProject.version
 
 application {
     mainClassName = "io.ktor.server.netty.EngineMain"
+}
+
+docker {
+    javaApplication {
+        baseImage.set("adoptopenjdk/openjdk11:alpine-jre")
+        maintainer.set("(c) Otus")
+        ports.set(listOf(8080))
+        val imageName = project.name
+        images.set(listOf(
+            "$imageName:${project.version}",
+            "$imageName:latest"
+        ))
+        jvmArgs.set(listOf("-Xms256m", "-Xmx512m"))
+    }
 }
 
 repositories {
@@ -41,9 +56,10 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
 
-//    implementation("com.github.JUtupe:ktor-rabbitmq:$ktorRabbitmqFeature")
-//    implementation("com.rabbitmq:amqp-client:$rabbitmqVersion")
+    implementation("com.github.JUtupe:ktor-rabbitmq:$ktorRabbitmqFeature")
+    implementation("com.rabbitmq:amqp-client:$rabbitmqVersion")
 
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
+    testImplementation("org.testcontainers:rabbitmq:$testContainersVersion")
 }
 

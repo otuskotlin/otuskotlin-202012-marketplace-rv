@@ -40,14 +40,21 @@ data class MpRequestArtCreate(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     val createData: MpArtCreateDto? = null,
 )  : IMpRequest, MpMessage() {
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
+        val stubCase: StubCase? = null
     ) : IMpDebug
+
+    @Serializable
+    enum class StubCase {
+        NONE,
+        SUCCESS
+    }
 }
 @Serializable
 @SerialName("MpRequestArtRead")
@@ -55,14 +62,21 @@ data class MpRequestArtRead(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     val artId: String? = null,
 ) : IMpRequest, MpMessage() {
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
+        val stubCase: StubCase? = null
     ) : IMpDebug
+
+    @Serializable
+    enum class StubCase {
+        NONE,
+        SUCCESS
+    }
 }
 
 @Serializable
@@ -71,14 +85,21 @@ data class MpRequestArtUpdate(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     val updateData: MpArtUpdateDto? = null,
 ) : IMpRequest, MpMessage() {
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
+        val stubCase: StubCase? = null
     ) : IMpDebug
+
+    @Serializable
+    enum class StubCase {
+        NONE,
+        SUCCESS
+    }
 }
 
 @Serializable
@@ -87,14 +108,21 @@ data class MpRequestArtDelete(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     val artId: String? = null,
 ) : IMpRequest, MpMessage() {
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
+        val stubCase: StubCase? = null
     ) : IMpDebug
+
+    @Serializable
+    enum class StubCase {
+        NONE,
+        SUCCESS
+    }
 }
 
 @Serializable
@@ -103,14 +131,14 @@ data class MpRequestArtList(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     val filterData: MpArtFilterDto? = null,
 ): IMpRequest, MpMessage() {
 
     @Serializable
     data class Debug(
         override val mode: MpWorkModeDto? = null,
-        val stubCase: StubCase? = null,
+        val stubCase: StubCase? = null
     ) : IMpDebug
 
     @Serializable
@@ -127,7 +155,7 @@ data class MpRequestArtList(
 data class MpResponseArtCreate(
     override val responseId: String? = null,
     override val onRequest: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     override val responseStatus: MpResponseStatusDto? = null,
     override val errors: List<MpErrorDto>? = null,
     override val status: ResponseStatusDto? = null,
@@ -138,7 +166,7 @@ data class MpResponseArtCreate(
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
     ) : IMpDebug
 }
 @Serializable
@@ -146,7 +174,7 @@ data class MpResponseArtCreate(
 data class MpResponseArtRead(
     override val responseId: String? = null,
     override val onRequest: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     override val responseStatus: MpResponseStatusDto? = null,
     override val errors: List<MpErrorDto>? = null,
     override val status: ResponseStatusDto? = null,
@@ -156,7 +184,7 @@ data class MpResponseArtRead(
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
     ) : IMpDebug
 }
 
@@ -165,7 +193,7 @@ data class MpResponseArtRead(
 data class MpResponseArtUpdate(
     override val responseId: String? = null,
     override val onRequest: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     override val responseStatus: MpResponseStatusDto? = null,
     override val errors: List<MpErrorDto>? = null,
     override val status: ResponseStatusDto? = null,
@@ -176,7 +204,7 @@ data class MpResponseArtUpdate(
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
     ) : IMpDebug
 }
 
@@ -185,7 +213,7 @@ data class MpResponseArtUpdate(
 data class MpResponseArtDelete(
     override val responseId: String? = null,
     override val onRequest: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     override val responseStatus: MpResponseStatusDto? = null,
     override val errors: List<MpErrorDto>? = null,
     override val status: ResponseStatusDto? = null,
@@ -197,7 +225,7 @@ data class MpResponseArtDelete(
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
     ) : IMpDebug
 }
 
@@ -206,7 +234,7 @@ data class MpResponseArtDelete(
 data class MpResponseArtList(
     override val responseId: String? = null,
     override val onRequest: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     override val responseStatus: MpResponseStatusDto? = null,
     override val errors: List<MpErrorDto>? = null,
     override val status: ResponseStatusDto? = null,
@@ -216,6 +244,6 @@ data class MpResponseArtList(
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
     ) : IMpDebug
 }

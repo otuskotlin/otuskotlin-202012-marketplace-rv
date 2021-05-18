@@ -12,10 +12,18 @@ fun MpBeContext.setWorkshopCreateQuery(request: MpRequestWorkshopCreate) {
         description = request.createData?.description?: "",
         tagIds = request.createData?.tagIds?.toMutableSet()?: mutableSetOf(),
     )
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestWorkshopCreate.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
 fun MpBeContext.setWorkshopReadQuery(request: MpRequestWorkshopRead) {
     this.requestWorkshopId = request.workshopId?.let { MpWorkshopIdModel(it) } ?: MpWorkshopIdModel.NONE
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestWorkshopRead.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
 fun MpBeContext.setWorkshopUpdateQuery(request: MpRequestWorkshopUpdate) {
@@ -25,10 +33,18 @@ fun MpBeContext.setWorkshopUpdateQuery(request: MpRequestWorkshopUpdate) {
         description = request.updateData?.description?: "",
         tagIds = request.updateData?.tagIds?.toMutableSet()?: mutableSetOf(),
     )
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestWorkshopUpdate.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
 fun MpBeContext.setWorkshopDeleteQuery(request: MpRequestWorkshopDelete) {
     this.requestWorkshopId = request.workshopId?.let { MpWorkshopIdModel(it) } ?: MpWorkshopIdModel.NONE
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestWorkshopDelete.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
 fun MpBeContext.setWorkshopListQuery(request: MpRequestWorkshopList) {
@@ -37,6 +53,10 @@ fun MpBeContext.setWorkshopListQuery(request: MpRequestWorkshopList) {
             text = it.text?: ""
         )
     }?: MpWorkshopFilterModel.NONE
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestWorkshopList.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
 fun MpBeContext.respondWorkshopCreate() = MpResponseWorkshopCreate(
