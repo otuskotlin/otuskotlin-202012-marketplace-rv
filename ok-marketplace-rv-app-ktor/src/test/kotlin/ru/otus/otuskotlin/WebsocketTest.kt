@@ -11,7 +11,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 internal class WebsocketTest {
-    /* test doesn't work
+
      @Test
      fun artListTest() {
            withTestApplication({ module(testing = true) }) {
@@ -37,7 +37,7 @@ internal class WebsocketTest {
 
                }
            }
-       } */
+       }
     @Test
     fun artListErrorTest() {
         withTestApplication({ module(testing = true) }) {

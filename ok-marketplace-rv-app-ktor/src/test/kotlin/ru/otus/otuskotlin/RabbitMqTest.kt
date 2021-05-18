@@ -1,5 +1,3 @@
-package ru.otus.otuskotlin
-
 import com.rabbitmq.client.CancelCallback
 import com.rabbitmq.client.ConnectionFactory
 import com.rabbitmq.client.DeliverCallback
@@ -9,9 +7,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeoutOrNull
 import org.testcontainers.containers.RabbitMQContainer
+import ru.otus.otuskotlin.jsonConfig
 import ru.otus.otuskotlin.marketplace.transport.models.arts.MpRequestArtList
 import ru.otus.otuskotlin.marketplace.transport.models.arts.MpResponseArtList
 import ru.otus.otuskotlin.marketplace.transport.models.common.MpMessage
+import ru.otus.otuskotlin.module
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -20,8 +20,9 @@ import kotlin.test.assertTrue
 internal class RabbitMqTest {
 
     @Test
-    fun artListTest() {
+    fun demandListTest() {
         withTestApplication({
+            // Выполняем настройки вместо файла application.conf
             (environment.config as MapApplicationConfig).apply {
                 put("marketplace.rabbitmq.endpoint", "amqp://guest:guest@localhost:$rabbitMqTestPort")
                 put("marketplace.rabbitmq.queueIn", queueIn)
@@ -29,15 +30,18 @@ internal class RabbitMqTest {
                 put("marketplace.rabbitmq.exchangeOut", exchangeOut)
             }
 
+            // Запускаем наше приложение в виде расширения
             module(testing = true)
         }) {
 
+            // Выполняем соединение с RabbitMQ
             ConnectionFactory().apply {
                 host = "localhost"
                 port = rabbitMqTestPort
             }.newConnection().use { connection ->
                 connection.createChannel().use { channel ->
 
+                    // Сюда сохраняем результат из консьюмера
                     var responseJson = ""
 
                     channel.exchangeDeclare(exchangeOut, "fanout", true)
@@ -91,7 +95,9 @@ internal class RabbitMqTest {
         val exchangeOut = "mpExchangeOut"
 
         val container by lazy {
-
+//            Этот образ предназначен для дебагинга, он содержит панель управления на порту httpPort
+//            RabbitMQContainer("rabbitmq:3-management").apply {
+//            Этот образ минимальный и не содержит панель управления
             RabbitMQContainer("rabbitmq:latest").apply {
                 withExchange(exchangeIn, "fanout")
                 withExchange(exchangeOut, "fanout")
@@ -99,6 +105,8 @@ internal class RabbitMqTest {
                 withBinding(exchangeIn, queueIn)
                 withExposedPorts(5672, 15672)
                 start()
+//                println("CONTAINER PORT: ${this.httpPort}, ${this.amqpPort}, ${this.amqpsPort}")
+//                println("CONTAINER URL: ${this.httpUrl}, ${this.amqpUrl}, ${this.amqpsUrl}")
             }
         }
 
