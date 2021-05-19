@@ -6,7 +6,7 @@ import ru.otus.otuskotlin.marketplace.transport.models.arts.*
 import ru.otus.otuskotlin.marketplace.transport.models.workshops.*
 import java.time.Instant
 
-fun MpBeContext.setWorkshopCreateQuery(request: MpRequestWorkshopCreate) {
+fun MpBeContext.setWorkshopCreateQuery(request: MpRequestWorkshopCreate) = setRequest(request) {
     requestWorkshop = MpWorkshopModel (
         title = request.createData?.title?: "",
         description = request.createData?.description?: "",
@@ -18,7 +18,7 @@ fun MpBeContext.setWorkshopCreateQuery(request: MpRequestWorkshopCreate) {
     }
 }
 
-fun MpBeContext.setWorkshopReadQuery(request: MpRequestWorkshopRead) {
+fun MpBeContext.setWorkshopReadQuery(request: MpRequestWorkshopRead) = setRequest(request) {
     this.requestWorkshopId = request.workshopId?.let { MpWorkshopIdModel(it) } ?: MpWorkshopIdModel.NONE
     stubCase = when (request.debug?.stubCase) {
         MpRequestWorkshopRead.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
@@ -26,7 +26,7 @@ fun MpBeContext.setWorkshopReadQuery(request: MpRequestWorkshopRead) {
     }
 }
 
-fun MpBeContext.setWorkshopUpdateQuery(request: MpRequestWorkshopUpdate) {
+fun MpBeContext.setWorkshopUpdateQuery(request: MpRequestWorkshopUpdate) = setRequest(request) {
     requestWorkshop = MpWorkshopModel (
         id = request.updateData?.id?.let { MpWorkshopIdModel(it) } ?: MpWorkshopIdModel.NONE,
         title = request.updateData?.title?: "",
@@ -39,7 +39,7 @@ fun MpBeContext.setWorkshopUpdateQuery(request: MpRequestWorkshopUpdate) {
     }
 }
 
-fun MpBeContext.setWorkshopDeleteQuery(request: MpRequestWorkshopDelete) {
+fun MpBeContext.setWorkshopDeleteQuery(request: MpRequestWorkshopDelete) = setRequest(request) {
     this.requestWorkshopId = request.workshopId?.let { MpWorkshopIdModel(it) } ?: MpWorkshopIdModel.NONE
     stubCase = when (request.debug?.stubCase) {
         MpRequestWorkshopDelete.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
@@ -47,7 +47,7 @@ fun MpBeContext.setWorkshopDeleteQuery(request: MpRequestWorkshopDelete) {
     }
 }
 
-fun MpBeContext.setWorkshopListQuery(request: MpRequestWorkshopList) {
+fun MpBeContext.setWorkshopListQuery(request: MpRequestWorkshopList) = setRequest(request) {
     this.requestWorkshopFilter = request.filterData?.let {
         MpWorkshopFilterModel(
             text = it.text?: ""

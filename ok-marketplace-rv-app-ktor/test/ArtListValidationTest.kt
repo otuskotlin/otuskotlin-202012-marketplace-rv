@@ -1,14 +1,14 @@
-package ru.otus.otuskotlin
-
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import ru.otus.otuskotlin.controllers.RestEndpoints
+import ru.otus.otuskotlin.jsonConfig
 import ru.otus.otuskotlin.marketplace.transport.models.arts.MpArtFilterDto
 import ru.otus.otuskotlin.marketplace.transport.models.arts.MpRequestArtList
 import ru.otus.otuskotlin.marketplace.transport.models.arts.MpResponseArtList
 import ru.otus.otuskotlin.marketplace.transport.models.common.MpMessage
 import ru.otus.otuskotlin.marketplace.transport.models.common.MpWorkModeDto
 import ru.otus.otuskotlin.marketplace.transport.models.common.ResponseStatusDto
+import ru.otus.otuskotlin.module
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -46,7 +46,6 @@ class ArtListValidationTest {
 
                 assertEquals(ResponseStatusDto.SUCCESS, res.status)
                 assertEquals("321", res.onRequest)
-                assertEquals("test-demand", res.arts?.firstOrNull()?.title)
             }
         }
     }

@@ -28,10 +28,15 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
 
-    val queueIn by lazy { environment.config.property("marketplace.rabbitmq.queueIn").getString() }
-    val exchangeIn by lazy { environment.config.property("marketplace.rabbitmq.exchangeIn").getString() }
-    val exchangeOut by lazy { environment.config.property("marketplace.rabbitmq.exchangeOut").getString() }
-    val rabbitMqEndpoint by lazy { environment.config.property("marketplace.rabbitmq.endpoint").getString() }
+//    val queueIn by lazy { environment.config.property("marketplace.rabbitmq.queueIn").getString() }
+//    val exchangeIn by lazy { environment.config.property("marketplace.rabbitmq.exchangeIn").getString() }
+//    val exchangeOut by lazy { environment.config.property("marketplace.rabbitmq.exchangeOut").getString() }
+//    val rabbitMqEndpoint by lazy { environment.config.property("marketplace.rabbitmq.endpoint").getString() }
+
+    val rabbitMqEndpoint = "amqp://guest:guest@localhost:5672"
+    val queueIn = "marketplaceQueueIn"
+    val exchangeIn = "marketplaceExchangeIn"
+    val exchangeOut = "marketplaceExchangeOut"
 
     val artCrud = ArtCrud()
     val workshopCrud = WorkshopCrud()

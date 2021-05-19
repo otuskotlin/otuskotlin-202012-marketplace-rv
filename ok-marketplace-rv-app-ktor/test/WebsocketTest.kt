@@ -1,12 +1,12 @@
-package ru.otus.otuskotlin
-
 import io.ktor.http.cio.websocket.*
 import io.ktor.server.testing.*
 import kotlinx.coroutines.withTimeoutOrNull
+import ru.otus.otuskotlin.jsonConfig
 import ru.otus.otuskotlin.marketplace.transport.models.arts.MpRequestArtList
 import ru.otus.otuskotlin.marketplace.transport.models.arts.MpResponseArtList
 import ru.otus.otuskotlin.marketplace.transport.models.common.MpMessage
 import ru.otus.otuskotlin.marketplace.transport.models.common.ResponseStatusDto
+import ru.otus.otuskotlin.module
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

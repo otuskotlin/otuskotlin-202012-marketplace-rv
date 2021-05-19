@@ -20,7 +20,7 @@ import kotlin.test.assertTrue
 internal class RabbitMqTest {
 
     @Test
-    fun demandListTest() {
+    fun artListTest() {
         withTestApplication({
             // Выполняем настройки вместо файла application.conf
             (environment.config as MapApplicationConfig).apply {

@@ -8,31 +8,31 @@ import ru.otus.otuskotlin.marketplace.transport.models.arts.*
 class ArtService(private val crud: ArtCrud) {
 
     suspend fun create(context: MpBeContext, query: MpRequestArtCreate?): MpResponseArtCreate = with (context) {
-        query?.also { setQuery(it) }
+        query?.also { setRequest(it) }
         crud.create(this)
         return respondArtCreate()
     }
 
     suspend fun read(context: MpBeContext, query: MpRequestArtRead?): MpResponseArtRead = with (context) {
-        query?.also { setQuery(it) }
+        query?.also { setRequest(it) }
         crud.read(this)
         return respondArtRead()
     }
 
     suspend fun update(context: MpBeContext, query: MpRequestArtUpdate?): MpResponseArtUpdate = with (context) {
-        query?.also { setQuery(it) }
+        query?.also { setRequest(it) }
         crud.update(this)
         return respondArtUpdate()
     }
 
     suspend fun delete(context: MpBeContext, query: MpRequestArtDelete?): MpResponseArtDelete = with (context) {
-        query?.also { setQuery(it) }
+        query?.also { setRequest(it) }
         crud.delete(this)
         return respondArtDelete()
     }
 
     suspend fun list(context: MpBeContext, query: MpRequestArtList?): MpResponseArtList = with (context) {
-        query?.also { setQuery(it) }
+        query?.also { setRequest(it) }
         crud.filter(this)
         return respondArtList()
     }
