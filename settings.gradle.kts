@@ -18,6 +18,7 @@ include("ok-marketplace-rv-app-ktor")
 include("ok-marketplace-rv-be-common")
 include("ok-marketplace-rv-be-mappers-mp")
 include("ok-marketplace-rv-be-business-logic")
+include("ok-marketplace-rv-be-repository-inmemory")
 //multiplatform
 include("ok-marketplace-rv-mp-common")
 include("ok-marketplace-rv-mp-transport")

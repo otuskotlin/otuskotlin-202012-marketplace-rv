@@ -1,9 +1,14 @@
 package ru.otus.otuskotlin.marketplace.rv.business.logic.backend
 
 import ru.otus.otuskotlin.marketplace.common.backend.context.MpBeContext
+import ru.otus.otuskotlin.marketplace.common.backend.repositories.IArtRepository
+import ru.otus.otuskotlin.marketplace.common.backend.repositories.IWorkshopRepository
 import ru.otus.otuskotlin.marketplace.rv.business.logic.backend.pipelines.*
 
-class ArtCrud {
+class ArtCrud(
+    private val artRepoTest: IArtRepository = IArtRepository.NONE,
+    private val workshopRepoTest: IWorkshopRepository = IWorkshopRepository.NONE,
+) {
     suspend fun create(context: MpBeContext) {
         ArtCreate.execute(context.apply (this::configureContext))
     }
@@ -25,6 +30,7 @@ class ArtCrud {
     }
 
     private fun configureContext(context: MpBeContext) {
-
+        context.artRepoTest = artRepoTest
+        context.workshopRepoTest = workshopRepoTest
     }
 }

@@ -16,6 +16,7 @@ fun MpBeContext.setWorkshopCreateQuery(request: MpRequestWorkshopCreate) = setRe
         MpRequestWorkshopCreate.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
         else -> MpStubCase.NONE
     }
+    workMode = request.debug?.mode.toModel()
 }
 
 fun MpBeContext.setWorkshopReadQuery(request: MpRequestWorkshopRead) = setRequest(request) {
@@ -24,6 +25,7 @@ fun MpBeContext.setWorkshopReadQuery(request: MpRequestWorkshopRead) = setReques
         MpRequestWorkshopRead.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
         else -> MpStubCase.NONE
     }
+    workMode = request.debug?.mode.toModel()
 }
 
 fun MpBeContext.setWorkshopUpdateQuery(request: MpRequestWorkshopUpdate) = setRequest(request) {
@@ -37,6 +39,7 @@ fun MpBeContext.setWorkshopUpdateQuery(request: MpRequestWorkshopUpdate) = setRe
         MpRequestWorkshopUpdate.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
         else -> MpStubCase.NONE
     }
+    workMode = request.debug?.mode.toModel()
 }
 
 fun MpBeContext.setWorkshopDeleteQuery(request: MpRequestWorkshopDelete) = setRequest(request) {
@@ -45,6 +48,7 @@ fun MpBeContext.setWorkshopDeleteQuery(request: MpRequestWorkshopDelete) = setRe
         MpRequestWorkshopDelete.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
         else -> MpStubCase.NONE
     }
+    workMode = request.debug?.mode.toModel()
 }
 
 fun MpBeContext.setWorkshopListQuery(request: MpRequestWorkshopList) = setRequest(request) {
@@ -57,6 +61,7 @@ fun MpBeContext.setWorkshopListQuery(request: MpRequestWorkshopList) = setReques
         MpRequestWorkshopList.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
         else -> MpStubCase.NONE
     }
+    workMode = request.debug?.mode.toModel()
 }
 
 fun MpBeContext.respondWorkshopCreate() = MpResponseWorkshopCreate(
@@ -65,7 +70,10 @@ fun MpBeContext.respondWorkshopCreate() = MpResponseWorkshopCreate(
     status = status.toTransport(),
     responseId = responseId,
     onRequest = onRequest,
-    endTime = Instant.now().toString()
+    endTime = Instant.now().toString(),
+    debug = MpResponseWorkshopCreate.Debug(
+        mode = workMode.takeIf { it != MpWorkMode.DEFAULT }?.toTransport()
+    )
 )
 
 fun MpBeContext.respondWorkshopRead() = MpResponseWorkshopRead(
@@ -74,7 +82,10 @@ fun MpBeContext.respondWorkshopRead() = MpResponseWorkshopRead(
     status = status.toTransport(),
     responseId = responseId,
     onRequest = onRequest,
-    endTime = Instant.now().toString()
+    endTime = Instant.now().toString(),
+    debug = MpResponseWorkshopRead.Debug(
+        mode = workMode.takeIf { it != MpWorkMode.DEFAULT }?.toTransport()
+    )
 )
 
 fun MpBeContext.respondWorkshopUpdate() = MpResponseWorkshopUpdate(
@@ -83,7 +94,10 @@ fun MpBeContext.respondWorkshopUpdate() = MpResponseWorkshopUpdate(
     status = status.toTransport(),
     responseId = responseId,
     onRequest = onRequest,
-    endTime = Instant.now().toString()
+    endTime = Instant.now().toString(),
+    debug = MpResponseWorkshopUpdate.Debug(
+        mode = workMode.takeIf { it != MpWorkMode.DEFAULT }?.toTransport()
+    )
 )
 
 fun MpBeContext.respondWorkshopDelete() = MpResponseWorkshopDelete(
@@ -92,7 +106,10 @@ fun MpBeContext.respondWorkshopDelete() = MpResponseWorkshopDelete(
     status = status.toTransport(),
     responseId = responseId,
     onRequest = onRequest,
-    endTime = Instant.now().toString()
+    endTime = Instant.now().toString(),
+    debug = MpResponseWorkshopDelete.Debug(
+        mode = workMode.takeIf { it != MpWorkMode.DEFAULT }?.toTransport()
+    )
 )
 
 fun MpBeContext.respondWorkshopList() = MpResponseWorkshopList(
@@ -102,7 +119,10 @@ fun MpBeContext.respondWorkshopList() = MpResponseWorkshopList(
     status = status.toTransport(),
     responseId = responseId,
     onRequest = onRequest,
-    endTime = Instant.now().toString()
+    endTime = Instant.now().toString(),
+    debug = MpResponseWorkshopList.Debug(
+        mode = workMode.takeIf { it != MpWorkMode.DEFAULT }?.toTransport()
+    )
 )
 
 internal fun MpWorkshopModel.toTransport() = MpWorkshopDto(

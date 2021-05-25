@@ -30,6 +30,10 @@ data class MpArtUpdateDto(
 @Serializable
 data class MpArtFilterDto(
     override val text: String? = null,
+    override val sortBy: MpSortDto? = null,
+    override val offset: Int? = null,
+    override val count: Int? = null,
+    override val includeDescription: Boolean? = null,
 ): IMpFilterItem
 
 // Requests
@@ -240,6 +244,7 @@ data class MpResponseArtList(
     override val status: ResponseStatusDto? = null,
     override val endTime: String? = null,
     val arts: List<MpArtDto>? = null,
+    val pageCount: Int? = null,
 ): IMpResponse, MpMessage() {
 
     @Serializable
