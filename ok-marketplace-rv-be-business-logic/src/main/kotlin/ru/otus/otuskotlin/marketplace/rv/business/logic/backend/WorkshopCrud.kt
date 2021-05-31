@@ -7,7 +7,9 @@ import ru.otus.otuskotlin.marketplace.rv.business.logic.backend.pipelines.*
 
 class WorkshopCrud(
     private val workshopRepoTest: IWorkshopRepository = IWorkshopRepository.NONE,
+    private val workshopRepoProd: IWorkshopRepository = IWorkshopRepository.NONE,
     private val artRepoTest: IArtRepository = IArtRepository.NONE,
+    private val artRepoProd: IArtRepository = IArtRepository.NONE,
 ) {
     suspend fun create(context: MpBeContext) {
         WorkshopCreate.execute(context.apply (this::configureContext))
@@ -31,6 +33,8 @@ class WorkshopCrud(
 
     private fun configureContext(context: MpBeContext) {
         context.workshopRepoTest = workshopRepoTest
+        context.workshopRepoProd = workshopRepoProd
         context.artRepoTest = artRepoTest
+        context.artRepoProd = artRepoProd
     }
 }

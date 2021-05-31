@@ -1,5 +1,7 @@
 package ru.otus.otuskotlin.marketplace.common.backend.models
 
+import java.util.*
+
 
 inline class MpArtIdModel(
     override val id: String
@@ -7,6 +9,9 @@ inline class MpArtIdModel(
     companion object {
         val NONE = MpArtIdModel("")
     }
+
+    fun asString() = id
+    fun asUUID(): UUID = UUID.fromString(id)
 }
 
 data class MpArtModel(

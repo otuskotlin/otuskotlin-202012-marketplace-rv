@@ -1,11 +1,16 @@
 package ru.otus.otuskotlin.marketplace.common.backend.models
 
+import java.util.*
+
 data class MpWorkshopIdModel(
     override val id: String
 ) : IMpThingIdModel<String> {
     companion object {
         val NONE = MpWorkshopIdModel("")
     }
+
+    fun asString() = id
+    fun asUUID(): UUID = UUID.fromString(id)
 }
 
 data class MpWorkshopModel(
@@ -18,6 +23,7 @@ data class MpWorkshopModel(
     companion object {
         val NONE = MpWorkshopModel()
     }
+
 }
 
 data class MpWorkshopFilterModel(

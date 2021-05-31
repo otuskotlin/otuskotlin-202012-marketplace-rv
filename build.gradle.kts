@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform") apply false
     kotlin("jvm") apply false
     kotlin("js") apply false
+    kotlin("kapt") apply false
 }
 
 group = "ru.otus.otuskotlin.marketplace-rv"
