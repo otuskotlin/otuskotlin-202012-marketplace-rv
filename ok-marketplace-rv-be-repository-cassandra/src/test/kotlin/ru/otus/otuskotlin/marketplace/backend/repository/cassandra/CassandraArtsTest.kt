@@ -6,10 +6,7 @@ import org.junit.BeforeClass
 import org.testcontainers.containers.GenericContainer
 import ru.otus.otuskotlin.marketplace.backend.repository.cassandra.arts.ArtRepositoryCassandra
 import ru.otus.otuskotlin.marketplace.common.backend.context.MpBeContext
-import ru.otus.otuskotlin.marketplace.common.backend.models.MpArtFilterModel
-import ru.otus.otuskotlin.marketplace.common.backend.models.MpArtIdModel
-import ru.otus.otuskotlin.marketplace.common.backend.models.MpArtModel
-import ru.otus.otuskotlin.marketplace.common.backend.models.MpUnitTypeModel
+import ru.otus.otuskotlin.marketplace.common.backend.models.*
 import java.time.Duration
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -33,6 +30,13 @@ internal class CassandraArtsTest {
                 .apply {
                     start()
                 }
+
+            val unit = MpUnitTypeModel(
+                name = "weight",
+                synonyms = mutableSetOf("вес"),
+                symbol = "kg",
+                symbols = mutableSetOf("Kg")
+            )
 
             repo = ArtRepositoryCassandra(
                 keyspaceName = keyspace,

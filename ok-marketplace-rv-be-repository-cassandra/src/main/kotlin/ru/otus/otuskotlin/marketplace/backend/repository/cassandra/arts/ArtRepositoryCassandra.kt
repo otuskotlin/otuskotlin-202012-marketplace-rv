@@ -29,7 +29,7 @@ class ArtRepositoryCassandra(
     override val testing: Boolean = false,
     private val timeout: Duration = Duration.ofSeconds(30),
     initObjects: Collection<MpArtModel> = emptyList(),
-) : IArtRepository, MpRepositoryCassandra(keyspaceName, hosts, port, user, pass, replicationFactor) {
+): IArtRepository, MpRepositoryCassandra(keyspaceName, hosts, port, user, pass, replicationFactor) {
 
     private val mapper by lazy {
         ArtCassandraMapperBuilder(session).build()
@@ -85,7 +85,7 @@ class ArtRepositoryCassandra(
         return withTimeout(timeout.toMillis()) {
             daoById.createAsync(dtoById).await()
             daoByTitle.createAsync(dtoByTitle).await()
-            val model = daoById.readAsync(id).await()?.toModel() ?: throw MpRepoNotFoundException(id)
+            val model = daoById.readAsync(id).await()?.toModel()?: throw MpRepoNotFoundException(id)
             context.responseArt = model
             model
         }
@@ -129,27 +129,25 @@ class ArtRepositoryCassandra(
         val filter = context.requestArtFilter
         var lastIndex = filter.offset + filter.count
         if (filter.text.length < 3) throw MpRepoIndexException(filter.text)
-        return withTimeout(timeout.toMillis()) {
+         return withTimeout(timeout.toMillis()) {
             val records = daoByTitle.filterByTitleAsync("%${filter.text}%").await().toList()
                 .sortedByDescending { it.timestamp }
-            val recordsCount = records.count()
-            if (recordsCount < lastIndex) lastIndex = recordsCount
-            val list = flow {
-                for (pos in filter.offset until lastIndex) {
-                    records[pos].id?.let { id ->
-                        emit(daoById.readAsync(id).await()?.toModel() ?: throw MpRepoNotFoundException(id))
-                    }
-                }
-            }.toList()
-            context.responseArts = list.toMutableList()
-            context.pageCount = list.count().takeIf { it != 0 }
-                ?.let { (recordsCount.toDouble() / it + 0.5).toInt() }
-                ?: Int.MIN_VALUE
-            list
+             val recordsCount = records.count()
+             if (recordsCount < lastIndex) lastIndex = recordsCount
+             val list = flow {
+                 for (pos in filter.offset until lastIndex) {
+                         records[pos].id?.let { id ->
+                             emit(daoById.readAsync(id).await()?.toModel() ?: throw MpRepoNotFoundException(id))
+                         }
+                 }
+             }.toList()
+             context.responseArts = list.toMutableList()
+             context.pageCount = list.count().takeIf { it != 0 }
+                 ?.let { (recordsCount.toDouble() / it + 0.5).toInt() }
+                 ?: Int.MIN_VALUE
+             list
         }
-
     }
-
 
     override fun CqlSession.createTables() {
         execute(

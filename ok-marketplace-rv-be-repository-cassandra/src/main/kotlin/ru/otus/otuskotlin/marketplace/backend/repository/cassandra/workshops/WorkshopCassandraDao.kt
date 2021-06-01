@@ -12,10 +12,18 @@ interface WorkshopByIdCassandraDao {
     @Select
     fun readAsync(id: String): ListenableFuture<WorkshopByIdCassandraDto?>
 
+    /**
+     *  В данном случае условие в Update избыточно, так как обновляется вся модель.
+     *  Может быть нужно при обновлении отдельных полей
+     */
     @Update(customIfClause = "${WorkshopByIdCassandraDto.LOCK_VERSION} = :lock_key")
     @StatementAttributes(consistencyLevel = "QUORUM")
     fun updateAsync(dto: WorkshopByIdCassandraDto, @CqlName("lock_key") lockKey: String): ListenableFuture<Boolean>
 
+    /**
+     *  При удалении по ключу требуется указание [entityClass], при удалении по всей модели
+     *  класс не требуется указывать, он берется из модели
+     */
     @Delete(ifExists = true, entityClass = [WorkshopByIdCassandraDto::class])
     fun deleteAsync(id: String): ListenableFuture<Boolean>
 }
