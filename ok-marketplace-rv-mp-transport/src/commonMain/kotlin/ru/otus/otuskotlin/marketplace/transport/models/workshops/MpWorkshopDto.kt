@@ -43,14 +43,21 @@ data class MpRequestWorkshopCreate(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     val createData: MpWorkshopCreateDto? = null,
 )  : IMpRequest, MpMessage() {
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
+        val stubCase: StubCase? = null
     ) : IMpDebug
+
+    @Serializable
+    enum class StubCase {
+        NONE,
+        SUCCESS
+    }
 }
 @Serializable
 @SerialName("MpRequestWorkshopRead")
@@ -58,14 +65,21 @@ data class MpRequestWorkshopRead(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     val workshopId: String? = null,
 ) : IMpRequest, MpMessage() {
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
+        val stubCase: StubCase? = null
     ) : IMpDebug
+
+    @Serializable
+    enum class StubCase {
+        NONE,
+        SUCCESS
+    }
 }
 
 @Serializable
@@ -74,14 +88,21 @@ data class MpRequestWorkshopUpdate(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     val updateData: MpWorkshopUpdateDto? = null,
 ) : IMpRequest, MpMessage() {
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
+        val stubCase: StubCase? = null
     ) : IMpDebug
+
+    @Serializable
+    enum class StubCase {
+        NONE,
+        SUCCESS
+    }
 }
 
 @Serializable
@@ -90,14 +111,21 @@ data class MpRequestWorkshopDelete(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     val workshopId: String? = null,
 ) : IMpRequest, MpMessage() {
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
+        val stubCase: StubCase? = null
     ) : IMpDebug
+
+    @Serializable
+    enum class StubCase {
+        NONE,
+        SUCCESS
+    }
 }
 
 @Serializable
@@ -106,14 +134,21 @@ data class MpRequestWorkshopList(
     override val requestId: String? = null,
     override val onRequestResponseId: String? = null,
     override val timeStart: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     val filterData: MpWorkshopFilterDto? = null,
 ): IMpRequest, MpMessage() {
 
     @Serializable
     data class Debug(
-        override val mode: MpWorkModeDto?
+        override val mode: MpWorkModeDto? = null,
+        val stubCase: StubCase? = null
     ) : IMpDebug
+
+    @Serializable
+    enum class StubCase {
+        NONE,
+        SUCCESS
+    }
 }
 
 //Responses
@@ -123,7 +158,7 @@ data class MpRequestWorkshopList(
 data class MpResponseWorkshopCreate(
     override val responseId: String? = null,
     override val onRequest: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     override val responseStatus: MpResponseStatusDto? = null,
     override val errors: List<MpErrorDto>? = null,
     override val status: ResponseStatusDto? = null,
@@ -141,7 +176,7 @@ data class MpResponseWorkshopCreate(
 data class MpResponseWorkshopRead(
     override val responseId: String? = null,
     override val onRequest: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     override val responseStatus: MpResponseStatusDto? = null,
     override val errors: List<MpErrorDto>? = null,
     override val status: ResponseStatusDto? = null,
@@ -162,7 +197,7 @@ data class MpResponseWorkshopUpdate(
     override val onRequest: String? = null,
     override val responseStatus: MpResponseStatusDto? = null,
     override val errors: List<MpErrorDto>? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     override val status: ResponseStatusDto? = null,
     override val endTime: String? = null,
     val workshop: MpWorkshopDto? = null,
@@ -181,7 +216,7 @@ data class MpResponseWorkshopDelete(
     override val onRequest: String? = null,
     override val responseStatus: MpResponseStatusDto? = null,
     override val errors: List<MpErrorDto>? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     override val status: ResponseStatusDto? = null,
     override val endTime: String? = null,
     val workshop: MpWorkshopDto? = null,
@@ -199,7 +234,7 @@ data class MpResponseWorkshopDelete(
 data class MpResponseWorkshopList(
     override val responseId: String? = null,
     override val onRequest: String? = null,
-    override val debug: IMpDebug? = null,
+    override val debug: Debug? = null,
     override val responseStatus: MpResponseStatusDto? = null,
     override val errors: List<MpErrorDto>? = null,
     override val status: ResponseStatusDto? = null,

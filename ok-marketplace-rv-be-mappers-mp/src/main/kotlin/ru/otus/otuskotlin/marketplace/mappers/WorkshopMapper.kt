@@ -6,37 +6,57 @@ import ru.otus.otuskotlin.marketplace.transport.models.arts.*
 import ru.otus.otuskotlin.marketplace.transport.models.workshops.*
 import java.time.Instant
 
-fun MpBeContext.setWorkshopCreateQuery(request: MpRequestWorkshopCreate) {
+fun MpBeContext.setWorkshopCreateQuery(request: MpRequestWorkshopCreate) = setRequest(request) {
     requestWorkshop = MpWorkshopModel (
         title = request.createData?.title?: "",
         description = request.createData?.description?: "",
         tagIds = request.createData?.tagIds?.toMutableSet()?: mutableSetOf(),
     )
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestWorkshopCreate.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
-fun MpBeContext.setWorkshopReadQuery(request: MpRequestWorkshopRead) {
+fun MpBeContext.setWorkshopReadQuery(request: MpRequestWorkshopRead) = setRequest(request) {
     this.requestWorkshopId = request.workshopId?.let { MpWorkshopIdModel(it) } ?: MpWorkshopIdModel.NONE
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestWorkshopRead.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
-fun MpBeContext.setWorkshopUpdateQuery(request: MpRequestWorkshopUpdate) {
+fun MpBeContext.setWorkshopUpdateQuery(request: MpRequestWorkshopUpdate) = setRequest(request) {
     requestWorkshop = MpWorkshopModel (
         id = request.updateData?.id?.let { MpWorkshopIdModel(it) } ?: MpWorkshopIdModel.NONE,
         title = request.updateData?.title?: "",
         description = request.updateData?.description?: "",
         tagIds = request.updateData?.tagIds?.toMutableSet()?: mutableSetOf(),
     )
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestWorkshopUpdate.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
-fun MpBeContext.setWorkshopDeleteQuery(request: MpRequestWorkshopDelete) {
+fun MpBeContext.setWorkshopDeleteQuery(request: MpRequestWorkshopDelete) = setRequest(request) {
     this.requestWorkshopId = request.workshopId?.let { MpWorkshopIdModel(it) } ?: MpWorkshopIdModel.NONE
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestWorkshopDelete.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
-fun MpBeContext.setWorkshopListQuery(request: MpRequestWorkshopList) {
+fun MpBeContext.setWorkshopListQuery(request: MpRequestWorkshopList) = setRequest(request) {
     this.requestWorkshopFilter = request.filterData?.let {
         MpWorkshopFilterModel(
             text = it.text?: ""
         )
     }?: MpWorkshopFilterModel.NONE
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestWorkshopList.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
 fun MpBeContext.respondWorkshopCreate() = MpResponseWorkshopCreate(

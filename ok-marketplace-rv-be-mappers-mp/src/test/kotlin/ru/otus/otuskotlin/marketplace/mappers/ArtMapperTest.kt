@@ -19,7 +19,7 @@ class ArtMapperTest {
         )
 
         val context =MpBeContext()
-        context.setQuery(request)
+        context.setRequest(request)
         assertEquals("some_title", context.requestArt.title)
         assertEquals("some_description", context.requestArt.description)
         assertTrue { context.requestArt.tagIds.contains("tag2") }
@@ -32,7 +32,7 @@ class ArtMapperTest {
         )
 
         val context =MpBeContext()
-        context.setQuery(request)
+        context.setRequest(request)
         assertEquals("some_id", context.requestArtId.id)
     }
 
@@ -48,7 +48,7 @@ class ArtMapperTest {
         )
 
         val context =MpBeContext()
-        context.setQuery(request)
+        context.setRequest(request)
         assertEquals("some_id", context.requestArt.id.id)
         assertEquals("some_title", context.requestArt.title)
         assertEquals("some_description", context.requestArt.description)
@@ -62,7 +62,7 @@ class ArtMapperTest {
         )
 
         val context =MpBeContext()
-        context.setQuery(request)
+        context.setRequest(request)
         assertEquals("some_id", context.requestArtId.id)
     }
 }

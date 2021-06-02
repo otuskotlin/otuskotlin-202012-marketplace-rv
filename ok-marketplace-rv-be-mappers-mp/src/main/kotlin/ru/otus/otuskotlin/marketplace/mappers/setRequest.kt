@@ -5,7 +5,7 @@ import ru.otus.otuskotlin.marketplace.transport.models.arts.*
 import ru.otus.otuskotlin.marketplace.transport.models.common.IMpRequest
 import ru.otus.otuskotlin.marketplace.transport.models.workshops.*
 
-fun MpBeContext.setQuery(request: IMpRequest) {
+fun MpBeContext.setRequest(request: IMpRequest) {
     when (request) {
         is MpRequestArtCreate -> this.setArtCreateQuery (request)
         is MpRequestArtRead -> this.setArtReadQuery (request)

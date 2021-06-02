@@ -1,11 +1,14 @@
 pluginManagement {
     val kotlinVersion: String by settings
+    val bmuschkoVersion: String by settings
 
     plugins {
-        kotlin("multiplatform") version kotlinVersion apply false
-        kotlin("jvm") version kotlinVersion apply false
-        kotlin("js") version kotlinVersion apply false
-        kotlin("plugin.serialization") version kotlinVersion apply false
+        kotlin("multiplatform") version kotlinVersion
+        kotlin("jvm") version kotlinVersion
+        kotlin("js") version kotlinVersion
+        kotlin("plugin.serialization") version kotlinVersion
+
+        id("com.bmuschko.docker-java-application") version bmuschkoVersion
     }
 }
 rootProject.name = "otuskotlin-202012-marketplace-rv"

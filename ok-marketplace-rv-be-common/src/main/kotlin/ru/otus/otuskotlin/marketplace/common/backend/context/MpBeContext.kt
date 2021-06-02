@@ -1,6 +1,8 @@
 package ru.otus.otuskotlin.marketplace.common.backend.context
 
 import ru.otus.otuskotlin.marketplace.common.backend.models.*
+import ru.otus.otuskotlin.marketplace.common.backend.repositories.EmptyUserSession
+import ru.otus.otuskotlin.marketplace.common.backend.repositories.IUserSession
 import java.time.Instant
 
 data class MpBeContext(
@@ -11,6 +13,8 @@ data class MpBeContext(
     var responseId: String = "",
     var onRequest: String = "",
     var frameworkErrors: MutableList<Throwable> = mutableListOf(),
+
+    val userSession: IUserSession<*> = EmptyUserSession,
 
     var requestArtId: MpArtIdModel = MpArtIdModel.NONE,
     var requestArt: MpArtModel = MpArtModel.NONE,

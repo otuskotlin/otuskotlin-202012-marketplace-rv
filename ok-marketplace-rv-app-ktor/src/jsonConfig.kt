@@ -17,19 +17,23 @@ val jsonConfig: Json by lazy {
                 subclass(MpRequestArtRead::class)
                 subclass(MpRequestArtDelete::class)
                 subclass(MpRequestArtUpdate::class)
+                subclass(MpRequestArtList::class)
                 subclass(MpResponseArtCreate::class)
                 subclass(MpResponseArtRead::class)
                 subclass(MpResponseArtDelete::class)
                 subclass(MpResponseArtUpdate::class)
+                subclass(MpResponseArtList::class)
 
                 subclass(MpRequestWorkshopCreate::class)
                 subclass(MpRequestWorkshopRead::class)
                 subclass(MpRequestWorkshopDelete::class)
                 subclass(MpRequestWorkshopUpdate::class)
+                subclass(MpRequestWorkshopList::class)
                 subclass(MpResponseWorkshopCreate::class)
                 subclass(MpResponseWorkshopRead::class)
                 subclass(MpResponseWorkshopDelete::class)
                 subclass(MpResponseWorkshopUpdate::class)
+                subclass(MpResponseWorkshopList::class)
             }
 
         }

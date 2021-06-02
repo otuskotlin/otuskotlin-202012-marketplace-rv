@@ -19,7 +19,7 @@ class WorkshopMapperTest {
         )
 
         val context = MpBeContext()
-        context.setQuery(request)
+        context.setRequest(request)
         assertEquals("some_title", context.requestWorkshop.title)
         assertEquals("some_description", context.requestWorkshop.description)
         assertTrue { context.requestWorkshop.tagIds.contains("tag2") }
@@ -32,7 +32,7 @@ class WorkshopMapperTest {
         )
 
         val context = MpBeContext()
-        context.setQuery(request)
+        context.setRequest(request)
         assertEquals("some_id", context.requestWorkshopId.id)
     }
 
@@ -48,7 +48,7 @@ class WorkshopMapperTest {
         )
 
         val context = MpBeContext()
-        context.setQuery(request)
+        context.setRequest(request)
         assertEquals("some_id", context.requestWorkshop.id.id)
         assertEquals("some_title", context.requestWorkshop.title)
         assertEquals("some_description", context.requestWorkshop.description)
@@ -62,7 +62,7 @@ class WorkshopMapperTest {
         )
 
         val context = MpBeContext()
-        context.setQuery(request)
+        context.setRequest(request)
         assertEquals("some_id", context.requestWorkshopId.id)
     }
 }

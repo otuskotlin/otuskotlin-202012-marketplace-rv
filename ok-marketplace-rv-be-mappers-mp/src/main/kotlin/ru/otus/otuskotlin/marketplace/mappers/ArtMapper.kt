@@ -4,40 +4,61 @@ import ru.otus.otuskotlin.marketplace.common.backend.context.MpBeContext
 import ru.otus.otuskotlin.marketplace.common.backend.models.MpArtFilterModel
 import ru.otus.otuskotlin.marketplace.common.backend.models.MpArtIdModel
 import ru.otus.otuskotlin.marketplace.common.backend.models.MpArtModel
+import ru.otus.otuskotlin.marketplace.common.backend.models.MpStubCase
 import ru.otus.otuskotlin.marketplace.transport.models.arts.*
 import java.time.Instant
 
-fun MpBeContext.setArtCreateQuery(request: MpRequestArtCreate) {
+fun MpBeContext.setArtCreateQuery(request: MpRequestArtCreate) = setRequest(request)  {
     requestArt = MpArtModel (
         title = request.createData?.title?: "",
         description = request.createData?.description?: "",
         tagIds = request.createData?.tagIds?.toMutableSet()?: mutableSetOf(),
         )
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestArtCreate.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
-fun MpBeContext.setArtReadQuery(request: MpRequestArtRead) {
+fun MpBeContext.setArtReadQuery(request: MpRequestArtRead) = setRequest(request) {
     this.requestArtId = request.artId?.let { MpArtIdModel(it) } ?: MpArtIdModel.NONE
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestArtRead.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
-fun MpBeContext.setArtUpdateQuery(request: MpRequestArtUpdate) {
+fun MpBeContext.setArtUpdateQuery(request: MpRequestArtUpdate) = setRequest(request)  {
     requestArt = MpArtModel (
         id = request.updateData?.id?.let {MpArtIdModel(it)} ?: MpArtIdModel.NONE,
         title = request.updateData?.title?: "",
         description = request.updateData?.description?: "",
         tagIds = request.updateData?.tagIds?.toMutableSet()?: mutableSetOf(),
     )
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestArtUpdate.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
-fun MpBeContext.setArtDeleteQuery(request: MpRequestArtDelete) {
+fun MpBeContext.setArtDeleteQuery(request: MpRequestArtDelete) = setRequest(request)  {
     this.requestArtId = request.artId?.let { MpArtIdModel(it) } ?: MpArtIdModel.NONE
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestArtDelete.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
-fun MpBeContext.setArtListQuery(request: MpRequestArtList) {
+fun MpBeContext.setArtListQuery(request: MpRequestArtList) = setRequest(request)  {
     this.requestArtFilter = request.filterData?.let {
         MpArtFilterModel(
             text = it.text?: ""
         )
     }?: MpArtFilterModel.NONE
+    stubCase = when (request.debug?.stubCase) {
+        MpRequestArtList.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
+        else -> MpStubCase.NONE
+    }
 }
 
 fun MpBeContext.respondArtCreate() = MpResponseArtCreate(
