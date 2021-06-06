@@ -5,7 +5,7 @@ import java.util.*
 
 inline class MpArtIdModel(
     override val id: String
-) : IMpThingIdModel<String> {
+) : IMpThingIdModel {
     companion object {
         val NONE = MpArtIdModel("")
     }

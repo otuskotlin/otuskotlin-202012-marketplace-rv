@@ -4,7 +4,7 @@ import java.util.*
 
 data class MpWorkshopIdModel(
     override val id: String
-) : IMpThingIdModel<String> {
+) : IMpThingIdModel {
     companion object {
         val NONE = MpWorkshopIdModel("")
     }

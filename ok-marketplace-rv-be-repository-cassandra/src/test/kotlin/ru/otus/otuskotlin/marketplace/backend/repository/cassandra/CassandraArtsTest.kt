@@ -31,13 +31,6 @@ internal class CassandraArtsTest {
                     start()
                 }
 
-            val unit = MpUnitTypeModel(
-                name = "weight",
-                synonyms = mutableSetOf("вес"),
-                symbol = "kg",
-                symbols = mutableSetOf("Kg")
-            )
-
             repo = ArtRepositoryCassandra(
                 keyspaceName = keyspace,
                 hosts = container.host,
@@ -84,11 +77,11 @@ internal class CassandraArtsTest {
     fun artReadTest() {
         runBlocking {
             val context = MpBeContext(
-                requestArtId = MpArtIdModel("test-id2")
+                requestArtId = MpArtIdModel("test-id1")
             )
             val model = repo.read(context)
             assertEquals(model, context.responseArt)
-            assertEquals("test-Art1", model.title)
+            assertEquals("test-Art", model.title)
         }
     }
 

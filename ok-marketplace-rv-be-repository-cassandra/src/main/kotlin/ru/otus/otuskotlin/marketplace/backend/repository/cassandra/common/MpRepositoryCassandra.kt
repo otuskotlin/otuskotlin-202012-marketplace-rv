@@ -67,10 +67,10 @@ abstract class MpRepositoryCassandra(
                 .withField(UnitTypeCassandraDto.ID, DataTypes.TEXT)
                 .withField(UnitTypeCassandraDto.NAME, DataTypes.TEXT)
                 .withField(UnitTypeCassandraDto.DESCRIPTION, DataTypes.TEXT)
-                .withField(UnitTypeCassandraDto.IS_BASE, DataTypes.BOOLEAN)
+                .withField(UnitTypeCassandraDto.SYNONYMS, DataTypes.setOf(DataTypes.TEXT))
                 .withField(UnitTypeCassandraDto.SYMBOL, DataTypes.TEXT)
                 .withField(UnitTypeCassandraDto.SYMBOLS, DataTypes.setOf(DataTypes.TEXT))
-                .withField(UnitTypeCassandraDto.SYNONYMS, DataTypes.setOf(DataTypes.TEXT))
+                .withField(UnitTypeCassandraDto.IS_BASE, DataTypes.BOOLEAN)
                 .build()
         )
     }
