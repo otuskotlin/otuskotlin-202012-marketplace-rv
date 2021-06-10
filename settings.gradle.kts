@@ -7,6 +7,7 @@ pluginManagement {
         kotlin("jvm") version kotlinVersion
         kotlin("js") version kotlinVersion
         kotlin("plugin.serialization") version kotlinVersion
+        kotlin("kapt") version kotlinVersion
 
         id("com.bmuschko.docker-java-application") version bmuschkoVersion
     }
@@ -18,6 +19,9 @@ include("ok-marketplace-rv-app-ktor")
 include("ok-marketplace-rv-be-common")
 include("ok-marketplace-rv-be-mappers-mp")
 include("ok-marketplace-rv-be-business-logic")
+include("ok-marketplace-rv-be-repository-inmemory")
+//include("ok-marketplace-rv-be-repository-sql")
+include("ok-marketplace-rv-be-repository-cassandra")
 //multiplatform
 include("ok-marketplace-rv-mp-common")
 include("ok-marketplace-rv-mp-transport")

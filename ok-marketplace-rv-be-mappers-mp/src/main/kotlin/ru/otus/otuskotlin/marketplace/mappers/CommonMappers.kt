@@ -3,9 +3,11 @@ package ru.otus.otuskotlin.marketplace.mappers
 import ru.otus.otuskotlin.marketplace.common.backend.context.MpBeContext
 import ru.otus.otuskotlin.marketplace.common.backend.context.MpBeContextStatus
 import ru.otus.otuskotlin.marketplace.common.backend.models.IMpError
+import ru.otus.otuskotlin.marketplace.common.backend.models.MpWorkMode
 import ru.otus.otuskotlin.marketplace.mappers.exceptions.WrongMpBeContextStatus
 import ru.otus.otuskotlin.marketplace.transport.models.common.IMpRequest
 import ru.otus.otuskotlin.marketplace.transport.models.common.MpErrorDto
+import ru.otus.otuskotlin.marketplace.transport.models.common.MpWorkModeDto
 import ru.otus.otuskotlin.marketplace.transport.models.common.ResponseStatusDto
 
 fun IMpError.toTransport() = MpErrorDto(
@@ -24,5 +26,16 @@ fun MpBeContextStatus.toTransport(): ResponseStatusDto = when(this) {
     MpBeContextStatus.FAILING -> throw WrongMpBeContextStatus(this)
     MpBeContextStatus.SUCCESS -> ResponseStatusDto.SUCCESS
     MpBeContextStatus.ERROR -> ResponseStatusDto.BAD_REQUEST
+}
+
+internal fun MpWorkModeDto?.toModel() = when(this) {
+    MpWorkModeDto.PROD -> MpWorkMode.PROD
+    MpWorkModeDto.TEST -> MpWorkMode.TEST
+    else -> MpWorkMode.DEFAULT
+}
+
+internal fun MpWorkMode.toTransport() = when(this) {
+    MpWorkMode.PROD -> MpWorkModeDto.PROD
+    MpWorkMode.TEST -> MpWorkModeDto.TEST
 }
 

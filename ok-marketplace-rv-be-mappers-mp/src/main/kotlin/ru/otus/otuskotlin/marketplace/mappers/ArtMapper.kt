@@ -1,10 +1,7 @@
 package ru.otus.otuskotlin.marketplace.mappers
 
 import ru.otus.otuskotlin.marketplace.common.backend.context.MpBeContext
-import ru.otus.otuskotlin.marketplace.common.backend.models.MpArtFilterModel
-import ru.otus.otuskotlin.marketplace.common.backend.models.MpArtIdModel
-import ru.otus.otuskotlin.marketplace.common.backend.models.MpArtModel
-import ru.otus.otuskotlin.marketplace.common.backend.models.MpStubCase
+import ru.otus.otuskotlin.marketplace.common.backend.models.*
 import ru.otus.otuskotlin.marketplace.transport.models.arts.*
 import java.time.Instant
 
@@ -18,6 +15,7 @@ fun MpBeContext.setArtCreateQuery(request: MpRequestArtCreate) = setRequest(requ
         MpRequestArtCreate.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
         else -> MpStubCase.NONE
     }
+    workMode = request.debug?.mode.toModel()
 }
 
 fun MpBeContext.setArtReadQuery(request: MpRequestArtRead) = setRequest(request) {
@@ -26,6 +24,7 @@ fun MpBeContext.setArtReadQuery(request: MpRequestArtRead) = setRequest(request)
         MpRequestArtRead.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
         else -> MpStubCase.NONE
     }
+    workMode = request.debug?.mode.toModel()
 }
 
 fun MpBeContext.setArtUpdateQuery(request: MpRequestArtUpdate) = setRequest(request)  {
@@ -39,6 +38,7 @@ fun MpBeContext.setArtUpdateQuery(request: MpRequestArtUpdate) = setRequest(requ
         MpRequestArtUpdate.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
         else -> MpStubCase.NONE
     }
+    workMode = request.debug?.mode.toModel()
 }
 
 fun MpBeContext.setArtDeleteQuery(request: MpRequestArtDelete) = setRequest(request)  {
@@ -47,6 +47,7 @@ fun MpBeContext.setArtDeleteQuery(request: MpRequestArtDelete) = setRequest(requ
         MpRequestArtDelete.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
         else -> MpStubCase.NONE
     }
+    workMode = request.debug?.mode.toModel()
 }
 
 fun MpBeContext.setArtListQuery(request: MpRequestArtList) = setRequest(request)  {
@@ -59,6 +60,7 @@ fun MpBeContext.setArtListQuery(request: MpRequestArtList) = setRequest(request)
         MpRequestArtList.StubCase.SUCCESS -> MpStubCase.ART_READ_SUCCESS
         else -> MpStubCase.NONE
     }
+    workMode = request.debug?.mode.toModel()
 }
 
 fun MpBeContext.respondArtCreate() = MpResponseArtCreate(
@@ -67,7 +69,10 @@ fun MpBeContext.respondArtCreate() = MpResponseArtCreate(
     status = status.toTransport(),
     responseId = responseId,
     onRequest = onRequest,
-    endTime = Instant.now().toString()
+    endTime = Instant.now().toString(),
+    debug = MpResponseArtCreate.Debug(
+        mode = workMode.takeIf { it != MpWorkMode.DEFAULT }?.toTransport()
+    )
 )
 
 fun MpBeContext.respondArtRead() = MpResponseArtRead(
@@ -76,7 +81,10 @@ fun MpBeContext.respondArtRead() = MpResponseArtRead(
     status = status.toTransport(),
     responseId = responseId,
     onRequest = onRequest,
-    endTime = Instant.now().toString()
+    endTime = Instant.now().toString(),
+    debug = MpResponseArtRead.Debug(
+        mode = workMode.takeIf { it != MpWorkMode.DEFAULT }?.toTransport()
+    )
 )
 
 fun MpBeContext.respondArtUpdate() = MpResponseArtUpdate(
@@ -85,7 +93,10 @@ fun MpBeContext.respondArtUpdate() = MpResponseArtUpdate(
     status = status.toTransport(),
     responseId = responseId,
     onRequest = onRequest,
-    endTime = Instant.now().toString()
+    endTime = Instant.now().toString(),
+    debug = MpResponseArtUpdate.Debug(
+        mode = workMode.takeIf { it != MpWorkMode.DEFAULT }?.toTransport()
+    )
 )
 
 fun MpBeContext.respondArtDelete() = MpResponseArtDelete(
@@ -94,7 +105,10 @@ fun MpBeContext.respondArtDelete() = MpResponseArtDelete(
     status = status.toTransport(),
     responseId = responseId,
     onRequest = onRequest,
-    endTime = Instant.now().toString()
+    endTime = Instant.now().toString(),
+    debug = MpResponseArtDelete.Debug(
+        mode = workMode.takeIf { it != MpWorkMode.DEFAULT }?.toTransport()
+    )
 )
 
 fun MpBeContext.respondArtList() = MpResponseArtList(
@@ -104,7 +118,10 @@ fun MpBeContext.respondArtList() = MpResponseArtList(
     status = status.toTransport(),
     responseId = responseId,
     onRequest = onRequest,
-    endTime = Instant.now().toString()
+    endTime = Instant.now().toString(),
+    debug = MpResponseArtList.Debug(
+        mode = workMode.takeIf { it != MpWorkMode.DEFAULT }?.toTransport()
+    )
 )
 
 internal fun MpArtModel.toTransport() = MpArtDto(

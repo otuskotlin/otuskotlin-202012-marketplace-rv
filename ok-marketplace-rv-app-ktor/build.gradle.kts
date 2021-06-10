@@ -45,6 +45,8 @@ dependencies {
     implementation(project(":ok-marketplace-rv-be-mappers-mp"))
     implementation(project(":ok-marketplace-rv-be-business-logic"))
     implementation(project(":ok-marketplace-rv-mp-transport"))
+    implementation(project(":ok-marketplace-rv-be-repository-inmemory"))
+    implementation(project(":ok-marketplace-rv-be-repository-cassandra"))
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     implementation("io.ktor:ktor-server-core:$ktorVersion")

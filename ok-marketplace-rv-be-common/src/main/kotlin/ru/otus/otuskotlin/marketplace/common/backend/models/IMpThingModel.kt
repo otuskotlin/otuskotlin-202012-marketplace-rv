@@ -1,11 +1,11 @@
 package ru.otus.otuskotlin.marketplace.common.backend.models
 
-interface IMpThingIdModel<E> {
-    val id: E
+interface IMpThingIdModel {
+    val id: String
 }
 
 interface IMpThingModel {
-    val id: IMpThingIdModel<String>
+    val id: IMpThingIdModel
     val title: String
     val description: String
     val tagIds: MutableSet<String>

@@ -4,41 +4,32 @@ import io.ktor.routing.*
 import ru.otus.otuskotlin.marketplace.mappers.*
 import ru.otus.otuskotlin.marketplace.rv.business.logic.backend.ArtCrud
 import ru.otus.otuskotlin.marketplace.transport.models.arts.*
+import ru.otus.otuskotlin.services.ArtService
 
-fun Routing.artRouting(crud: ArtCrud) {
+fun Routing.artRouting(service: ArtService) {
     post(RestEndpoints.artCreate) {
         handleRoute<MpRequestArtCreate, MpResponseArtCreate> { query ->
-            query?.also { setRequest(it) }
-            crud.create(this)
-            respondArtCreate()
+            service.create(this, query)
         }
     }
     post(RestEndpoints.artRead) {
         handleRoute<MpRequestArtRead, MpResponseArtRead> { query ->
-            query?.also { setRequest(it) }
-            crud.read(this)
-            respondArtRead()
+            service.read(this, query)
         }
     }
     post(RestEndpoints.artUpdate) {
         handleRoute<MpRequestArtUpdate, MpResponseArtUpdate> { query ->
-            query?.also { setRequest(it) }
-            crud.update(this)
-            respondArtUpdate()
+            service.update(this, query)
         }
     }
     post(RestEndpoints.artDelete) {
         handleRoute<MpRequestArtDelete, MpResponseArtDelete> { query ->
-            query?.also { setRequest(it) }
-            crud.delete(this)
-            respondArtDelete()
+            service.delete(this, query)
         }
     }
     post(RestEndpoints.artList) {
         handleRoute<MpRequestArtList, MpResponseArtList> { query ->
-            query?.also { setRequest(it) }
-            crud.filter(this)
-            respondArtList()
+            service.list(this, query)
         }
     }
 }
